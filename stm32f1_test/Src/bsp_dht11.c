@@ -116,21 +116,23 @@ uint8_t Read_TempAndHumidity (DHT11_DATA_TypeDef *DHT11_DATA)
 		//Dong pin lai
 		DHT11_DOUT_1 ;
 		//Kiem tra sum truyen dung tra lai SUCCESS, neu sai tra lai ERROR ;
-		if(DHT11_DATA->check_sum != DHT11_DATA->humi_int + DHT11_DATA->humi_deci + DHT11_DATA->temp_int + 
+		if(DHT11_DATA->check_sum == DHT11_DATA->humi_int + DHT11_DATA->humi_deci + DHT11_DATA->temp_int + 
 			DHT11_DATA->temp_deci)
-		{
+			return SUCCESS ;
+		else
 			return ERROR ;
-		}
 		//
+		/*
 		uint16_t tempdata;
-		tempdata = ((uint16_t) DHT11_DATA->humi_int << 8)+ DHT11_DATA->humi_deci;
+		tempdata = ((uint16_t) DHT11_DATA->humi_int << 8) + DHT11_DATA->humi_deci;
 		DHT11_DATA->humi_int = tempdata / 10;
 		DHT11_DATA->humi_deci = tempdata % 10;
 		
-		tempdata = ((uint16_t) DHT11_DATA->temp_int << 8)+ DHT11_DATA->temp_deci;
+		tempdata = ((uint16_t) DHT11_DATA->temp_int << 8) + DHT11_DATA->temp_deci;
 		DHT11_DATA->temp_int = tempdata / 10;
 		DHT11_DATA->temp_deci = tempdata % 10;
 		return SUCCESS;
+		*/
 	}		
 	else
 		return ERROR ;
